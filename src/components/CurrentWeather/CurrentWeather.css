@@ -8,6 +8,12 @@
     font-size: 2rem;
 }
 
+.weather-figures {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .temperature {
     text-align: right;
     font-size: 4rem;

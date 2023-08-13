@@ -12,6 +12,7 @@ import {
   getCurrentWeatherResponse,
 } from "./DTOs/index";
 import "./App.css";
+import Loader from "./components/common/Loader";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -62,7 +63,11 @@ function App() {
         navbarFor={navbarFor}
       />
       {loading ? (
-        <h4 style={{textAlign: "center"}}>Loading</h4>
+        <div
+          style={{ display: "flex", justifyContent: "center", height: "500px", paddingTop: '10rem' }}
+        >
+          <Loader width={40} height={40} radius={1} />
+        </div>
       ) : (
         <>
           <CurrentWeather currentWeatherData={currentWeatherData} />
