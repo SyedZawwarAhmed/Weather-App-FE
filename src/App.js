@@ -62,7 +62,7 @@ function App() {
         navbarFor={navbarFor}
       />
       {loading ? (
-        <h1>Loading</h1>
+        <h4 style={{textAlign: "center"}}>Loading</h4>
       ) : (
         <>
           <CurrentWeather currentWeatherData={currentWeatherData} />
