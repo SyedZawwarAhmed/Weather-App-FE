@@ -6,6 +6,7 @@ export class getDailyWeatherResponse {
   currentWeather;
   currentTemperature;
   weatherIcon;
+  weatherIconSrc;
 
   constructor(dailyWeatherData) {
     this.city = dailyWeatherData.city;
