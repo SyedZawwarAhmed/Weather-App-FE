@@ -5,7 +5,7 @@ function DailyWeather({dailyWeatherData}) {
   return (
     <div className="daily-weather">
     {dailyWeatherData.map(item => {
-    const { day, weather, temperature, weatherIcon, time } = item;
+    const { day, weather, temperature, weatherIcon } = item;
       return (
         <div  className="day-weather">
           <h2>{day}</h2>

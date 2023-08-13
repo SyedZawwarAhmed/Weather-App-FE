@@ -1,4 +1,3 @@
-import { getDailyWeatherResponse } from "../DTOs/getDailyWeatherResponse";
 import { getDailyWeather } from "../Services/getDailyWeather";
 
 async function dailyWeatherResponse(city) {

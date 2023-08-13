@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import DailyWeather from "./components/DailyWeather/DailyWeather";
 import Navbar from "./components/common/Navbar/Navbar";
@@ -16,6 +16,7 @@ import Loader from "./components/common/Loader";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
   const [cities, setCities] = useState([]);
   const [currentWeather, setCurrentWeather] = useState({});
   const [dailyWeather, setDailyWeather] = useState([]);
@@ -24,13 +25,30 @@ function App() {
     localStorage.getItem(navbarFor) || "Karachi"
   );
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setCities(await citiesResponse());
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    }
+    fetchData()
+  }, []);
+
   useLayoutEffect(() => {
     async function fetchData() {
-      setLoading(true);
-      setCities(await citiesResponse());
-      setCurrentWeather(await currentWeatherResponse(option));
-      setDailyWeather(await dailyWeatherResponse(option));
-      setLoading(false);
+      try {
+        setLoading(true);
+        setCurrentWeather(await currentWeatherResponse(option));
+        setDailyWeather(await dailyWeatherResponse(option));
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(error.message);
+      }
     }
     fetchData();
   }, [option]);
@@ -64,7 +82,13 @@ function App() {
         navbarFor={navbarFor}
       />
       {loading ? (
-        <div style={{ display: "flex", justifyContent: "center", paddingTop: '10rem' }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "10rem",
+          }}
+        >
           <Loader width={40} height={40} radius={1} />
         </div>
       ) : (
