@@ -26,7 +26,7 @@ function App() {
 
   useLayoutEffect(() => {
     async function fetchData() {
-      setLoading(true)
+      setLoading(true);
       setCities(await citiesResponse());
       setCurrentWeather(await currentWeatherResponse(option));
       setDailyWeather(await dailyWeatherResponse(option));
@@ -64,9 +64,7 @@ function App() {
         navbarFor={navbarFor}
       />
       {loading ? (
-        <div
-          style={{ display: "flex", justifyContent: "center", height: "500px", paddingTop: '10rem' }}
-        >
+        <div style={{ display: "flex", justifyContent: "center", paddingTop: '10rem' }}>
           <Loader width={40} height={40} radius={1} />
         </div>
       ) : (

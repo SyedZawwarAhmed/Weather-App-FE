@@ -26,6 +26,7 @@ body {
   padding: 1em;
   color: hsl(0, 0%, 100%);
   width: 1000px;
+  min-height: 680px;
   background-color: hsla(0, 0%, 100%, 0.144);
   border-radius: 1rem;
   display: flex;
