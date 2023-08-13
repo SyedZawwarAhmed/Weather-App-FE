@@ -6,10 +6,15 @@ import { navbarFor, title } from "./data/appData";
 import { currentWeatherResponse } from "./data/currentWeatherData";
 import { dailyWeatherResponse } from "./data/dailyWeatherData";
 import { citiesResponse } from "./data/citiesData";
-import { getCitiesResponse, getDailyWeatherResponse, getCurrentWeatherResponse } from "./DTOs/index";
+import {
+  getCitiesResponse,
+  getDailyWeatherResponse,
+  getCurrentWeatherResponse,
+} from "./DTOs/index";
 import "./App.css";
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const [cities, setCities] = useState([]);
   const [currentWeather, setCurrentWeather] = useState({});
   const [dailyWeather, setDailyWeather] = useState([]);
@@ -23,6 +28,7 @@ function App() {
       setCities(await citiesResponse());
       setCurrentWeather(await currentWeatherResponse(option));
       setDailyWeather(await dailyWeatherResponse(option));
+      setLoading(false);
     }
     fetchData();
   }, [option]);
@@ -55,8 +61,14 @@ function App() {
         setOption={setOption}
         navbarFor={navbarFor}
       />
-      <CurrentWeather currentWeatherData={currentWeatherData} />
-      <DailyWeather dailyWeatherData={dailyWeatherData} />
+      {loading ? (
+        <h1>Loading</h1>
+      ) : (
+        <>
+          <CurrentWeather currentWeatherData={currentWeatherData} />
+          <DailyWeather dailyWeatherData={dailyWeatherData} />
+        </>
+      )}
     </div>
   );
 }
