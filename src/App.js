@@ -26,6 +26,7 @@ function App() {
 
   useLayoutEffect(() => {
     async function fetchData() {
+      setLoading(true)
       setCities(await citiesResponse());
       setCurrentWeather(await currentWeatherResponse(option));
       setDailyWeather(await dailyWeatherResponse(option));
